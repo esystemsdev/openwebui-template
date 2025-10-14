@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  openwebui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: openwebui-local
+    ports:
+      - "3001:8080"
+    volumes:
+      - openwebui:/app/backend/data
+    environment:
+      - DATABASE_URL=postgresql://flowise:flowise123@host.docker.internal:5432/openwebui
+      - ENABLE_SIGNUP=true
+      - WEBUI_NAME=AIFabrix OpenWebUI Local
+      - FLOWISE_API_URL=http://host.docker.internal:3000/api/v1/
+      - FLOWISE_API_KEY=
+    restart: unless-stopped
+
+volumes:
+  openwebui:
