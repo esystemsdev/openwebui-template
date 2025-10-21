@@ -66,7 +66,7 @@ cd C:\git\esystemsdev\openwebui-template\aifabrix
 
 #### Step 4: Access OpenWebUI
 
-- **URL**: `http://localhost:3001`
+- **URL**: `http://localhost:3003`
 - **Login**: Create your account through the signup form
 
 #### Step 5: Management Commands
@@ -118,17 +118,17 @@ This script will:
 
 #### Step 3: Access OpenWebUI
 
-- **URL**: `http://10.3.0.4:3000`
+- **URL**: `http://10.3.0.4:3003`
 - **Login**: Use the configured admin credentials
 
 ## 🌐 Access OpenWebUI
 
 ### Local PC Access
-- **URL**: `http://localhost:3001`
+- **URL**: `http://localhost:3003`
 - **Login**: Create your account through the signup form
 
 ### Developer Server (Azure VM) Access
-- **URL**: `http://10.3.0.4:3000`
+- **URL**: `http://10.3.0.4:3003`
 - **Login**: Use the configured admin credentials from deployment script
 
 ## 📁 Configuration Details
@@ -137,7 +137,7 @@ This script will:
 
 The `docker-compose-openwebui.yml` file includes:
 
-- **Port**: 3001 (mapped from container port 8080)
+- **Port**: 3003 (mapped from container port 8080)
 - **Database**: PostgreSQL connection to local Flowise database
 - **Authentication**: Signup enabled for initial setup
 - **Security**: Uses local PostgreSQL server
@@ -148,7 +148,7 @@ The `docker-compose-openwebui.yml` file includes:
 
 The deployment script (`deploy-openwebui-vm.ps1`) configures:
 
-- **Port**: 3000 (mapped from container port 8080)
+- **Port**: 3003 (mapped from container port 8080)
 - **Database**: PostgreSQL connection using Azure PostgreSQL server
 - **Authentication**: Admin user with configured credentials
 - **Security**: Uses Azure Key Vault for secrets
@@ -230,9 +230,9 @@ docker restart openwebui
 - No external ports exposed beyond localhost
 
 #### Developer Server
-Ensure your Azure VM's Network Security Group (NSG) allows inbound traffic on port 3000:
+Ensure your Azure VM's Network Security Group (NSG) allows inbound traffic on port 3003:
 
-- **Port**: 3000
+- **Port**: 3003
 - **Protocol**: TCP
 - **Source**: Any (or specific IP ranges)
 - **Action**: Allow
@@ -257,18 +257,18 @@ Ensure your Azure VM's Network Security Group (NSG) allows inbound traffic on po
 #### Port Already in Use
 
 **Local PC:**
-If port 3001 is occupied, modify the Docker Compose file:
+If port 3000 is occupied, modify the Docker Compose file:
 
 ```yaml
 ports:
-  - "3002:8080"  # Use port 3002 instead
+  - "3003:8080"  # Use port 3003 instead
 ```
 
 **Developer Server:**
 If port 3000 is occupied, modify the deployment script parameter:
 
 ```powershell
-.\deploy-openwebui-vm.ps1 -Port 3001
+.\deploy-openwebui-vm.ps1 -Port 3003
 ```
 
 #### Database Connection Issues
@@ -352,7 +352,7 @@ docker restart openwebui
 **Local PC:**
 ```powershell
 # Check if OpenWebUI is responding
-curl http://localhost:3001/api/v1/ping
+curl http://localhost:3003/api/v1/ping
 
 # Check container health
 docker inspect openwebui-local --format='{{.State.Health.Status}}'
@@ -361,7 +361,7 @@ docker inspect openwebui-local --format='{{.State.Health.Status}}'
 **Developer Server:**
 ```bash
 # Check if OpenWebUI is responding
-curl http://10.3.0.4:3000/api/v1/ping
+curl http://10.3.0.4:3003/api/v1/ping
 
 # Check container health
 docker inspect openwebui --format='{{.State.Health.Status}}'
@@ -452,7 +452,7 @@ Deploys OpenWebUI to Azure VM with full configuration management.
 - `DatabaseUser`: Database user (default: `pgadmin`)
 - `VmUser`: VM SSH user (default: `flowiseuser`)
 - `VmIp`: VM IP address (default: `10.3.0.4`)
-- `Port`: External port (default: `3000`)
+- `Port`: External port (default: `3003`)
 - `DefaultUser`: Admin user email (default: `admin@esystems.fi`)
 - `WebuiName`: Web UI display name (default: `AIFabrix OpenWebUI`)
 - `OllamaBaseUrl`: Ollama service URL (default: `http://ollama:11434`)
@@ -469,7 +469,7 @@ Deploys OpenWebUI to Azure VM with full configuration management.
 .\deploy-openwebui-vm.ps1 -ReDeploy
 
 # Custom configuration
-.\deploy-openwebui-vm.ps1 -Port 3001 -EnableSignup "true" -WebuiName "My OpenWebUI"
+.\deploy-openwebui-vm.ps1 -Port 3003 -EnableSignup "true" -WebuiName "My OpenWebUI"
 ```
 
 **Required Azure Key Vault Secrets:**
@@ -492,7 +492,7 @@ You'll know OpenWebUI is working correctly when:
 
 ### Local PC
 - ✅ Container shows "Up" status in `docker ps`
-- ✅ OpenWebUI loads at `http://localhost:3001`
+- ✅ OpenWebUI loads at `http://localhost:3003`
 - ✅ Signup form works without permission errors
 - ✅ Database connection is established
 - ✅ No errors in container logs
@@ -500,7 +500,7 @@ You'll know OpenWebUI is working correctly when:
 
 ### Developer Server (Azure VM)
 - ✅ Container shows "Up" status in `docker ps`
-- ✅ OpenWebUI loads at `http://10.3.0.4:3000`
+- ✅ OpenWebUI loads at `http://10.3.0.4:3003`
 - ✅ Admin login works with configured credentials
 - ✅ Database connection is established
 - ✅ No errors in container logs

@@ -20,7 +20,7 @@ docker-compose -f docker-compose-openwebui.yml up -d
 
 Write-Host ""
 Write-Host "Setup complete!" -ForegroundColor Green
-Write-Host "Access OpenWebUI at: http://localhost:3001" -ForegroundColor Cyan
+Write-Host "Access OpenWebUI at: http://localhost:3003" -ForegroundColor Cyan
 Write-Host "Login: admin@esystems.fi / Flowise,1234" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "To stop: docker-compose -f docker-compose-openwebui.yml down" -ForegroundColor White

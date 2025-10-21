@@ -24,7 +24,7 @@ param(
   # App / logging
   [ValidateSet('error','warn','info','verbose','debug')]
   [string]$LOG_LEVEL = "info",
-  [int]$Port = 3000,
+  [int]$Port = 8080,
 
   # OpenWebUI specific settings
   [string]$DefaultUser = "admin@esystems.fi",
@@ -32,7 +32,7 @@ param(
   [string]$OllamaBaseUrl = "http://ollama:11434",
   [string]$FlowiseApiUrl = "https://chat.esystems.fi/api/v1/",
   [string]$FlowiseApiKey = "",
-  [string]$EnableSignup = "false",
+  [string]$EnableSignup = "true",
   [string]$EnableCommunitySharing = "false",
   [string]$EnableOauthSocialLogin = "false",
   [string]$MaxFileSize = "15728640",
@@ -251,7 +251,7 @@ ssh -o StrictHostKeyChecking=no -i $SshKey "${VmUser}@${VmIp}" "chmod +x $remote
 Write-Host "[5/5] Execute..." -ForegroundColor Green
 ssh -o StrictHostKeyChecking=no -i $SshKey "${VmUser}@${VmIp}" "bash $remoteScriptPath"
 
-Remove-Item $tempFile -Force
+#Remove-Item $tempFile -Force
 Write-Host "Daily update check completed." -ForegroundColor Green
 Write-Host "OpenWebUI running on http://${VmIp}:${Port}"
 Write-Host "To access OpenWebUI, open http://${VmIp}:${Port} in your browser." -ForegroundColor Yellow
